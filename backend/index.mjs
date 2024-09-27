@@ -22,6 +22,20 @@ app.post('/api/data', (req, res) => {
   users.push(newUser)
   res.status(201).json({ message: 'New user created!', data: newUser })
 })
+app.delete('/api/users/:id', (req, res) => {
+  const userId = parseInt(req.params.id)
+  const userIndex = users.findIndex(user => user.id === userId)
+
+  if (userIndex !== -1) {
+      // remove user from array
+      // const deletedUser = users.splice(userIndex, 1)
+      users.splice(userIndex, 1);
+      res.status(200).json({ message: `User with id ${userId} deleted 😊` })
+  } else {
+      res.status(404).json({ message: `User with id ${userId} not found 😢` })
+  }
+})
+
 app.listen(3000,() => {
   console.log('http://localhost:3000')
 })

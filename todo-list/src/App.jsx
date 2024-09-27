@@ -38,6 +38,10 @@ function App() {
     console.log(error);
   })
   }
+  let handleDelete = (id) => {
+    
+    console.log(id)
+  }
   return (
     <>
     <input
@@ -48,7 +52,10 @@ function App() {
     >ADD</button>
     <ul>
       {users.map((item) => (
-        <li key={item.id}>{item.name} <span className='ml-5'> <button className='border-2'>Edit</button> <button className='border-2'>Delete</button></span></li>
+        <li key={item.id}>{item.name} <span className='ml-5'> <button className='border-2'>Edit</button> 
+        <button
+        onClick={() => handleDelete(item.id)}
+        className='border-2'>Delete</button></span></li>
       ))}
     </ul>
     </>
