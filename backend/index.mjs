@@ -11,7 +11,17 @@ let users = [
 app.get("/api/data",(req,res) => {
   res.json(users)
 })
+app.post('/api/data', (req, res) => {
+  const body = req.body;
 
+  const newUser = {
+      id: users.length + 1,
+      ...body
+  }
+
+  users.push(newUser)
+  res.status(201).json({ message: 'New user created!', data: newUser })
+})
 app.listen(3000,() => {
   console.log('http://localhost:3000')
 })
