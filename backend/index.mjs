@@ -22,9 +22,10 @@ app.post('/api/data', (req, res) => {
   users.push(newUser)
   res.status(201).json({ message: 'New user created!', data: newUser })
 })
-app.delete('/api/users/:id', (req, res) => {
+
+app.delete('/api/data/:id', (req, res) => {
   const userId = parseInt(req.params.id)
-  const userIndex = users.findIndex(user => user.id === userId)
+  const userIndex = users.findIndex(user => user.id === userId);
 
   if (userIndex !== -1) {
       // remove user from array
