@@ -38,7 +38,15 @@ function App() {
     console.log(error);
   })
   }
-  
+  const updateUserById = (id) => {
+    axios.put(`${API_URL}/${id}`, { name: updateUser.name })
+      .then(response => {
+        setUsers(users.map(user => (user.id === id ? response.data : user)));
+        setUpdateUser({ id: '', name: '' }); // Reset input
+        fetchedData();
+      })
+      .catch(err => console.error(err));
+  };
   let handleDelete = (id) => {
       axios.delete(`${API_URL}/${id}`)
         .then(() => {
@@ -56,7 +64,9 @@ function App() {
     >ADD</button>
     <ul>
       {users.map((item) => (
-        <li key={item.id}>{item.name} <span className='ml-5'> <button className='border-2'>Edit</button> 
+        <li key={item.id}>{item.name} <span className='ml-5'> <button
+        onClick={() => updateUserById(item.id)}
+        className='border-2'>Edit</button> 
         <button
         onClick={() => handleDelete(item.id)}
         className='border-2'>Delete</button></span></li>
