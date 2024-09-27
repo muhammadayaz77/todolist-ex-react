@@ -23,6 +23,21 @@ app.post('/api/data', (req, res) => {
   res.status(201).json({ message: 'New user created!', data: newUser })
 })
 
+app.put('/api/data/:id', (req, res) => {
+  const userId = parseInt(req.params.id)
+  const userIndex = users.findIndex(user => user.id === userId);
+
+  if (userIndex !== -1) {
+      const updatedUser = { ...users[userIndex], ...req.body }
+      
+      // update user in array
+      users[userIndex] = updatedUser
+      res.status(200).json({ message: `User with id ${userId} updated 😊`, updatedUser })
+  } else {
+      res.status(404).json({ message: `User with id ${userId} not found 😢` })
+  }
+})
+
 app.delete('/api/data/:id', (req, res) => {
   const userId = parseInt(req.params.id)
   const userIndex = users.findIndex(user => user.id === userId);
