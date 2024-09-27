@@ -25,7 +25,8 @@ function App() {
     let user = newUser.current.value
     axios.post(API_URL, { name : user })
   .then(function (response) {
-    setUsers([...users,response.data])
+    setUsers([...users,response.data]);
+    fetchedData();
     // fetchedData();
     // handle success
     // fetchedData()
